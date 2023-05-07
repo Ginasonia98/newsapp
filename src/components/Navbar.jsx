@@ -4,13 +4,12 @@ import { auth } from "../firebase";
 
 const Navbar = () => {
   const { googleSignIn, user } = UserAuth();
-  const [isXlScreen, setIsXlScreen] = useState(false);
 
   let Links = [
-    { name: "HOME" },
-    { name: "SERVICE" },
-    { name: "ABOUT" },
-    { name: "NEWS" },
+    { name: "Home" },
+    { name: "Service" },
+    { name: "About" },
+    { name: "News" },
   ];
   let [open, setOpen] = useState(false);
 
@@ -30,19 +29,6 @@ const Navbar = () => {
     }
   };
 
-  const handleScreenSizeChange = (matches) => {
-    setIsXlScreen(matches);
-  };
-
-  useEffect(() => {
-    const xlScreenMediaQuery = window.matchMedia("(min-width: 1280px)");
-    xlScreenMediaQuery.addListener(handleScreenSizeChange);
-    setIsXlScreen(xlScreenMediaQuery.matches);
-
-    return () => {
-      xlScreenMediaQuery.removeListener(handleScreenSizeChange);
-    };
-  }, []);
 
   return (
     <div className="shadow-md w-full fixed top-0 left-0">
@@ -74,28 +60,28 @@ const Navbar = () => {
               <div className="text-gray-800 duration-500">{link.name}</div>
             </li>
           ))}
-          <>
-            {user ? (
-              <p className=" text-gray-800 font-[Poppins] py-2 px-6 rounded md:ml-8 duration-500">
-                {user.displayName}
-              </p>
-            ) : (
+          <div>
+              {user ? (
+                <p className="text-gray-700 font-bold text-sm">
+                  {user.displayName}
+                </p>
+              ) : (
+                <button
+                  className=" text-gray-800 font-bold  focus:ring-4 focus:ring-purple-300  rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
+                  onClick={handleGoogleSignIn}
+                >
+                  Log in
+                </button>
+              )}
+            </div>
+            <div>
               <button
-                className="inline-flex items-center p-2 ml-1 text-sm text-gray-800 rounded-lg lg:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                onClick={handleGoogleSignIn}
-              >
-                Login
-              </button>
-            )}
-            {user && (
-              <button
-                className="inline-flex items-center p-2 ml-1 text-sm text-gray-800 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="text-gray-800 focus:ring-4 focus:ring-purple-300 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
                 onClick={handleSignOut}
               >
-                Logout
+                Log Out
               </button>
-            )}
-          </>
+            </div>
         </ul>
       </div>
     </div>
