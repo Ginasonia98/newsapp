@@ -1,13 +1,23 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import NewsItem from "../components/NewsItem";
+import Footer from "../components/Footer";
+import News from "../components/News";
 
 const Home = () => {
   return (
-    <div>
+    <>
+      <div>
       <Navbar />
-      <NewsItem />
-    </div>
+      </div>
+      <div className="bg-slate-50 dark:bg-slate-900 mt-20">
+        <div className="container mx-auto mb-20">
+        <News />
+        </div>
+      </div>
+      <div className="mt-5">
+        <Footer/>
+      </div>
+    </>
   );
 };
 

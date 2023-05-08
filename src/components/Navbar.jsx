@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { auth } from "../firebase";
 
@@ -31,7 +31,7 @@ const Navbar = () => {
 
 
   return (
-    <div className="shadow-md w-full fixed top-0 left-0">
+    <div className="shadow-md w-full fixed top-0 left-0 font-bold">
       <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
@@ -62,7 +62,7 @@ const Navbar = () => {
           ))}
           <div>
               {user ? (
-                <p className="text-gray-700 font-bold text-sm">
+                <p className="text-gray-800 font-bold text-sm">
                   {user.displayName}
                 </p>
               ) : (
