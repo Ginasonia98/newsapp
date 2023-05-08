@@ -9,7 +9,7 @@ const Home = () => {
       <div>
       <Navbar />
       </div>
-      <div className="bg-slate-50 dark:bg-slate-900 mt-20">
+      <div className="mt-20">
         <div className="container mx-auto mb-20">
         <News />
         </div>
