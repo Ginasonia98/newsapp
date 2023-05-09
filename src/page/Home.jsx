@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import News from "../components/News";
+import Button from "../components/Button"
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
         <News />
         </div>
       </div>
+      <Button/>
       <div className="mt-5">
         <Footer/>
       </div>
