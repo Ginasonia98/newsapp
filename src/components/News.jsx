@@ -4,12 +4,12 @@ import { getNewsFetch } from "../newsState";
 
 const News = () => {
   const news = useSelector((state) => state.news.news);
+  const currentPage = useSelector((state) => state.news.currentPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getNewsFetch());
   }, [dispatch]);
-  console.log(news);
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-1">
@@ -19,7 +19,7 @@ const News = () => {
           {news.length === 0 ? (
             <p>Loading news</p>
           ) : (
-            news.map((news, index) => (
+            news[currentPage - 1].map((news, index) => (
               <div className="w-full" key={index}>
                 <div
                   className="rounded-b-3xl overflow-hidden bg-white hover:bg-slate-50 dark:bg-slate-950 dark:hover:bg-slate-900 hover:transition-all dark:hover:transition-all shadow-lg m-5 border dark:border-slate-600"

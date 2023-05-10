@@ -1,47 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getNewsFetch } from "../newsState";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { changeCurrentPage } from "../newsState";
 
-const Button = () => {
-  const news = useSelector((state) => state.news.news);
+const Pagination = () => {
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPageCount, setTotalPageCount] = useState(0);
+  const news = useSelector((state) => state.news.news);
+  const currentPage = useSelector((state) => state.news.currentPage);
 
-  let limit = 5;
-
-  useEffect(() => {
-    dispatch(getNewsFetch({ limit, page: currentPage }));
-  }, [dispatch, currentPage]);
-
-  useEffect(() => {
-    if (news.length > 0) {
-      const totalPageCount = Math.ceil(news[0].totalResults / limit);
-      setTotalPageCount(totalPageCount);
-    }
-  }, [news]);
-
-  const handlePrev = async () => {
-    if (currentPage === 1) return;
-    setCurrentPage((prevPage) => prevPage - 1);
-  };
-
-  const handleNext = async () => {
-    if (currentPage >= totalPageCount) return;
-    setCurrentPage((prevPage) => prevPage + 1);
+  const handlePageChange = (page) => {
+    dispatch(changeCurrentPage(page));
   };
 
   return (
     <div className="w-full flex justify-center mb-5">
       <button
         className="text-white bg-rose-500 hover:bg-rose-600 dark:text-slate-200 py-1 px-4 rounded mt-10 mr-5"
-        onClick={handlePrev}
+        onClick={() => handlePageChange(currentPage - 1)}
+        disabled={currentPage === 1}
       >
         Prev
       </button>
+      {news.map((_, pageNumber) => (
+        <button
+          key={pageNumber}
+          className={`text-white bg-rose-500 hover:bg-rose-600 dark:text-slate-200 py-1 px-4 rounded mt-10 mx-1 ${
+            pageNumber + 1 === currentPage ? "bg-rose-600" : ""
+          }`}
+          onClick={() => handlePageChange(pageNumber + 1)}
+        >
+          {pageNumber + 1}
+        </button>
+      ))}
       <button
-        className="text-white bg-rose-500 hover:bg-rose-600 dark:text-slate-200 py-1 px-4 rounded mt-10"
-        onClick={handleNext}
+        className="text-white bg-rose-500 hover:bg-rose-600 dark:text-slate-200 py-1 px-4 rounded mt-10 ml-5"
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={currentPage === news.length}
       >
         Next
       </button>
@@ -49,5 +43,4 @@ const Button = () => {
   );
 };
 
-export default Button;
-
+export default Pagination;
