@@ -1,5 +1,5 @@
 import "./App.css";
-import Home from "./components/Home";
+import Home from "./page/Home";
 import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
