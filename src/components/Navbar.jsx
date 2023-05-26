@@ -29,7 +29,6 @@ const Navbar = () => {
     }
   };
 
-
   return (
     <div className="w-full fixed top-0 left-0 font-bold">
       <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
@@ -57,31 +56,31 @@ const Navbar = () => {
         >
           {Links.map((link) => (
             <li key={link.name} className="md:mx-4  md:my-0 my-7">
-              <div className="text-gray-800 duration-500">{link.name}</div>
+              <div className="text-gray-600 duration-500">{link.name}</div>
             </li>
           ))}
           <div>
-              {user ? (
-                <p className="text-gray-800 font-bold text-sm">
-                  {user.displayName}
-                </p>
-              ) : (
-                <button
-                  className=" text-gray-800 font-bold  focus:ring-4 focus:ring-purple-300  rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
-                  onClick={handleGoogleSignIn}
-                >
-                  Log in
-                </button>
-              )}
-            </div>
-            <div>
+            {user ? (
+              <p className="text-gray-600 font-bold text-sm">
+                {user.displayName}
+              </p>
+            ) : (
               <button
-                className="text-gray-800 focus:ring-4 focus:ring-purple-300 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
-                onClick={handleSignOut}
+                className="text-gray-600 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 mb-2 sm:mb-0"
+                onClick={handleGoogleSignIn}
               >
-                Log Out
+                Log in
               </button>
-            </div>
+            )}
+          </div>
+          <div>
+            <button
+              className="text-gray-600 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0"
+              onClick={handleSignOut}
+            >
+              Log Out
+            </button>
+          </div>
         </ul>
       </div>
     </div>
